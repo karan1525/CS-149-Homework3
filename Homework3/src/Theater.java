@@ -16,6 +16,12 @@ public class Theater {
 		}
 	}
 	
+	
+	public void sellSeat(Customer customer){ //sells a seat
+		Seat seat = new Seat(customer.getName());
+		
+	}
+	
 	public void printTheater(){ //prints out customer names of theater
 		
 		for(int i = 0; i < ROWS; i++){ 
@@ -37,6 +43,9 @@ public class Theater {
 		}
 		return false;
 	}
+	
+	
+	
 	
 	
 	
