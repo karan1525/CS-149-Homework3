@@ -41,7 +41,7 @@ public class Theater {
 				}
 			}
 		}
-		return false;
+		return true;
 	}
 	
 	

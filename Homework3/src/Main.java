@@ -6,15 +6,17 @@ public class Main implements Runnable{
 	public Main(){
 //		this.runnable = new Thread(this);
 //		runnable.start();
+		
+		
+		
 	}
 	
 	public static void main(String[] args){
-		new Main();
 	}
-	
-	
+
 	@Override
 	public void run() {
+		// TODO Auto-generated method stub
 		
 	}
 

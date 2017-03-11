@@ -3,7 +3,7 @@ import java.util.Queue;
 
 public class MSeller extends Thread{
 	private Queue<Customer> customerLine;
-	private int timeToComplete;
+	private int timeToCompleteSale;
 	private boolean isOpen;
 	private int ticketsSold;
 
@@ -13,12 +13,7 @@ public class MSeller extends Thread{
 		isOpen = true;
 	}
 	
-	public void addCustomerToLine(){
-	}
-	
-	public void helpCustomer(){
-		
-	}
+
 	public void startSelling(){
 		
 	}
