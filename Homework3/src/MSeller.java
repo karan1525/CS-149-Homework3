@@ -6,6 +6,7 @@ public class MSeller extends Thread{
 	private int timeToCompleteSale;
 	private boolean isOpen;
 	private int ticketsSold;
+	private int numTurnedAway;
 
 	public MSeller(){
 		ticketsSold =0;
@@ -15,6 +16,6 @@ public class MSeller extends Thread{
 	
 
 	public void startSelling(){
-		
+		System.out.println("MBOOTH");
 	}
 }

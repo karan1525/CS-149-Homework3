@@ -3,8 +3,8 @@ public class Customer {
 	private int arrivalTime;
 	private String name;
 	
-	public Customer(){
-		
+	public Customer(String name){
+		this.name = name;
 	}
 	
 	public int getArrivalTime(){
