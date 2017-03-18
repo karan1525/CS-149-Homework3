@@ -10,13 +10,23 @@ public class HSeller extends Thread{
 	
 	
 	public HSeller(){
-		ticketsSold =0;
+		ticketsSold = 0;
 		customerLine = new LinkedList();
 		isOpen = true;
 	}
 	
 	public void startSelling(){
-		System.out.println("MBOOTH");
+		System.out.println("HBOOTH");
 	}
+
+	public int getTicketsSold() {
+		return ticketsSold;
+	}
+
+	public int getTimeToCompleteSale() {
+		return timeToCompleteSale;
+	}
+
+
 	
 }

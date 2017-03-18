@@ -20,6 +20,12 @@ public class LSeller extends Thread{
 		System.out.println("LBOOTH");
 	}
 	
+	public int getTicketsSold() {
+		return ticketsSold;
+	}
 
+	public int getTimeToCompleteSale() {
+		return timeToCompleteSale;
+	}
 
 }

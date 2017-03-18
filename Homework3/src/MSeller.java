@@ -18,4 +18,12 @@ public class MSeller extends Thread{
 	public void startSelling(){
 		System.out.println("MBOOTH");
 	}
+	
+	public int getTicketsSold() {
+		return ticketsSold;
+	}
+
+	public int getTimeToCompleteSale() {
+		return timeToCompleteSale;
+	}
 }
