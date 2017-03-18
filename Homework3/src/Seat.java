@@ -4,13 +4,10 @@ public class Seat {
 	private boolean isSold;
 	private String customerName;
 	 
-	
-	
 	public Seat(String customerName){
 		this.customerName = customerName;
 		isSold = false;
 	}
-	
 	
 	public boolean isSold(){
 		return this.isSold;

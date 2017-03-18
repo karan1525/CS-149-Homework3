@@ -1,52 +1,107 @@
 
 public class Theater {
-	
-	private Seat[][] theater;
-	private final int ROWS = 10; 
-	private final int COLUMNS = 10; 
 
-	
-	public Theater(){
-		theater = new Seat[ROWS][COLUMNS]; //create 10x10 theater of seats
-		
-		for(int i = 0; i < ROWS; i++){ //fill empty theater with -- values
-			for(int j =0; j < COLUMNS; j++){
+	private Seat[][] theater;
+	private final int ROWS = 10;
+	private final int COLUMNS = 10;
+
+	public Theater() {
+		theater = new Seat[ROWS][COLUMNS]; // create 10x10 theater of seats
+
+		for (int i = 0; i < ROWS; i++) { // fill empty theater with -- values
+			for (int j = 0; j < COLUMNS; j++) {
 				theater[i][j] = new Seat("-----");
 			}
 		}
 	}
-	
-	
-	public void sellSeat(Customer customer){ //sells a seat
-		Seat seat = new Seat(customer.getName());
-		
+
+	/**
+	 * The theater sells the ticket to customer
+	 * @param customer customer's name 
+	 * @param sellerID find the row based on the sellerID
+	 */
+	public void sellSeat(Customer customer, String sellerID) {
+		int row = 0;
+		switch (sellerID.substring(0, 1)) {
+		case "H": // Row 1
+			row = 1;
+			while (!isFull()) {
+				int col = nearestSeat(row);
+				if (col != -1) {
+					theater[row - 1][col] = new Seat(customer.getName());
+					theater[row - 1][col].isSold();
+					break;
+				} else {
+					row++;
+				}
+			}
+			break;
+		case "M": // Row 5 -> 6 -> 4 -> 7 -> etc( 3 -> 8 -> 2 -> 9 -> 1 -> 10 )
+			row = 5;
+			int gap = 0;
+			while (!isFull() && row <= 10) {
+				int col = nearestSeat(row);
+				if (col != -1) {
+					theater[row - 1][col] = new Seat(customer.getName());
+					break;
+				} else { // if that row is full -> search for another row
+					if (row >= 5) {
+						row = row + 1 + gap; gap++;
+					} else if (row < 5) {
+						row = row - 1 + gap; gap++;
+					}
+				}
+			}
+			break;
+		case "L":// Row 10 -> 9 -> up
+			row = 10;
+			while (!isFull()) {
+				int col = nearestSeat(row);
+				if (col != -1) {
+					theater[row - 1][col] = new Seat(customer.getName());
+					theater[row - 1][col].isSold();
+					break;
+				} else {
+					row--;
+				}
+			}
+			break;
+		}
 	}
-	
-	public void printTheater(){ //prints out customer names of theater
-		
-		for(int i = 0; i < ROWS; i++){ 
+
+	public void printTheater() { // prints out customer names of theater
+		for (int i = 0; i < ROWS; i++) {
 			System.out.print("|");
-			for(int j =0; j < COLUMNS; j++){
+			for (int j = 0; j < COLUMNS; j++) {
 				System.out.print(theater[i][j].getCustomerName() + " ");
 			}
 			System.out.println("|");
 		}
 	}
 	
-	public boolean isFull(){ //checks if theater is full by customer Name
-		for(int i = 0; i < ROWS; i++){ 
-			for(int j =0; j < COLUMNS; j++){
-				if(theater[i][j].getCustomerName().equals("-----")){
+	public boolean isFull() { // checks if theater is full by customer Name
+		for (int i = 0; i < ROWS; i++) {
+			for (int j = 0; j < COLUMNS; j++) {
+				if (theater[i][j].getCustomerName().equals("-----")) {
 					return false;
 				}
 			}
 		}
 		return true;
 	}
-	
-	
-	
-	
-	
-	
+
+	/**
+	 * Find the available nearest seat in the column
+	 * @param row the seat row
+	 * @return -1 if the row is full
+	 */
+	public int nearestSeat(int row) {
+		for (int j = 0; j < COLUMNS; j++) {
+			if (theater[row - 1][j].getCustomerName().equals("-----")) {
+				return j;
+			}
+		}
+		return -1;
+	}
+
 }

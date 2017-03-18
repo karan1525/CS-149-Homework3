@@ -2,18 +2,22 @@
 public class Customer {
 	private int arrivalTime;
 	private String name;
-	
-	public Customer(String name){
-		this.name = name;
+
+	public Customer(int arrivalTime) {
+		this.name = "";
+		this.arrivalTime = arrivalTime;
 	}
-	
-	public int getArrivalTime(){
+
+	public int getArrivalTime() {
 		return arrivalTime;
 	}
-	
-	public String getName(){
+
+	public String getName() {
 		return name;
 	}
 	
-	
+	public void setName(String newName) {
+		name = newName;
+	}
+
 }

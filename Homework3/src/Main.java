@@ -1,60 +1,58 @@
-import java.util.Scanner;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Random;
 
-public class Main implements Runnable{
+public class MSeller extends Thread {
+	private Queue<Customer> customerLine;
+	private int timeToCompleteSale;
+	private boolean isOpen;
+	private int ticketsSold;
+	private int numTurnedAway;
+	private String sellerID;
+	private Theater theater;
 
-	Thread runnable;
-	
-	public Main(){
-		this.runnable = new Thread(this);
-		System.out.println("START");
-		runnable.start();
-		try {
-			runnable.join();
-			System.out.println("DONE");
-		} catch (InterruptedException e) {
+	public MSeller(int numOfCustomers, Theater t, int ID) {
+		ticketsSold = 0;
+		isOpen = true;
+		sellerID = "M" + String.valueOf(ID);
+		this.theater = t;
+
+		// Each seller can expect N customers to arrive at random times
+		Comparator<Customer> comp = new ComparatorByArrivalTime();
+		customerLine = new PriorityQueue<Customer>(numOfCustomers, comp);
+
+		Random random = new Random();
+		// 1. Add based on arrival time first
+		for (int i = 0; i < numOfCustomers; i++) {
+			Customer c = new Customer(random.nextInt(60));
+			customerLine.add(c);
+		}
+		// 2. Then name the customer based on the arrival time
+		int index = 1;
+		for (Customer c : customerLine) {
+			if (numOfCustomers < 9)
+				c.setName(sellerID + "0" + String.valueOf(index));
+			else
+				c.setName(sellerID + String.valueOf(index)); // for 10 or 15
+			index++;
 		}
 	}
-	
-	public static void main(String[] args){
-		new Main();
+
+	public void startSelling() {
+		System.out.println("MBOOTH");
+		//Not done - testing
+		for(Customer c :customerLine){
+			theater.sellSeat(c, sellerID);
+		}
 	}
 
-	@Override
-	public void run() {
-		Scanner in = new Scanner(System.in);
-		System.out.println("How many customers?: " ); //get the number of customers
-		try{
-			int numOfCustomers = in.nextInt();
-			in.close();
-		}
-		catch (Exception e){
-			System.out.println("Please enter the number of customers");
-			System.exit(0);
-		}
-
-		Theater theater = new Theater(); //created theater
-		
-		
-		HSeller hBooth = new HSeller();//create all threads and run them here
-		
-		for(int i = 0; i < 4; i++){
-			MSeller mBooth = new MSeller();
-			mBooth.startSelling();
-		}
-		
-		for(int i =0; i < 6; i++){
-			LSeller lBooth = new LSeller();
-			lBooth.startSelling();
-		}
-		hBooth.startSelling();
-
-		System.out.println("THEATER");//prints current theater
-		theater.printTheater(); 
-		System.out.println("The theather is full: " + theater.isFull());
-		
-		
+	public int getTicketsSold() {
+		return ticketsSold;
 	}
 
-	
-	
+	public int getTimeToCompleteSale() {
+		return timeToCompleteSale;
+	}
 }
