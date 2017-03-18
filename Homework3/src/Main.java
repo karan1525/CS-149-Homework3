@@ -35,7 +35,7 @@ public class Main implements Runnable{
 		Theater theater = new Theater(); //created theater
 		
 		
-		HSeller hBooth = new HSeller();//create all threads
+		HSeller hBooth = new HSeller();//create all threads and run them here
 		
 		for(int i = 0; i < 4; i++){
 			MSeller mBooth = new MSeller();
