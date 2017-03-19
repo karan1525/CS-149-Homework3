@@ -2,11 +2,14 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.CyclicBarrier;
+
+
 
 public class Main implements Runnable{
 
 	Thread runnable;
-	
+
 	public Main(){
 		this.runnable = new Thread(this);
 		System.out.println("START");
@@ -17,7 +20,7 @@ public class Main implements Runnable{
 		} catch (InterruptedException e) {
 		}
 	}
-	
+
 	public static void main(String[] args){
 		new Main();
 	}
@@ -26,7 +29,7 @@ public class Main implements Runnable{
 	public void run() {
 		int numOfCustomers = 0;
 		int time = 0; //Can run from 0 -> 59
-		
+
 		Scanner in = new Scanner(System.in);
 		System.out.println("How many customers?: " ); //get the number of customers
 		try{ //read the input & create customers & put it into queue
@@ -38,21 +41,52 @@ public class Main implements Runnable{
 			System.exit(0);
 		}
 
+
 		Theater theater = new Theater(); //created theater
 		//Seller for high-priced tickets
 		HSeller hBooth = new HSeller(numOfCustomers, theater, 0);//create all threads and run them here
- 		hBooth.startSelling();
- 		
+
 		//Sellers for medium-priced tickets
-		for(int i = 0; i < 4; i++){
-			MSeller mBooth = new MSeller(numOfCustomers, theater, i + 1);
-			mBooth.startSelling();
-		}
-		
+		MSeller m1Booth = new MSeller(numOfCustomers, theater, 1);
+		MSeller m2Booth = new MSeller(numOfCustomers, theater, 2);
+		MSeller m3Booth = new MSeller(numOfCustomers, theater, 3);
+		MSeller m4Booth = new MSeller(numOfCustomers, theater,  4);
+
 		//Sellers for low-priced tickets
-		for(int i =0; i < 6; i++){
-			LSeller lBooth = new LSeller(numOfCustomers, theater, i + 1);
-			lBooth.startSelling();
+		LSeller l1Booth = new LSeller(numOfCustomers, theater, 1);
+		LSeller l2Booth = new LSeller(numOfCustomers, theater, 2);
+		LSeller l3Booth = new LSeller(numOfCustomers, theater, 3);
+		LSeller l4Booth = new LSeller(numOfCustomers, theater, 4);
+		LSeller l5Booth = new LSeller(numOfCustomers, theater, 5);
+		LSeller l6Booth = new LSeller(numOfCustomers, theater, 6);
+
+		
+		hBooth.start();
+		m1Booth.start();
+		m2Booth.start();
+		m3Booth.start();
+		m4Booth.start();
+		l1Booth.start();
+		l2Booth.start();
+		l3Booth.start();
+		l4Booth.start();
+		l5Booth.start();
+		l6Booth.start();
+
+		try {
+			hBooth.join();
+			m1Booth.join();
+			m2Booth.join();
+			m3Booth.join();
+			m4Booth.join();
+			l1Booth.join();
+			l2Booth.join();
+			l3Booth.join();
+			l4Booth.join();
+			l5Booth.join();
+			l6Booth.join();			
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 
 		System.out.println("THEATER");//prints current theater

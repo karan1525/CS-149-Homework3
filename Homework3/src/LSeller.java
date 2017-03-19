@@ -3,6 +3,8 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Random;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 
 public class LSeller extends Thread {
 	private Queue<Customer> customerLine;
@@ -40,8 +42,11 @@ public class LSeller extends Thread {
 		}
 	}
 	
-	public void startSelling() {
+	
+	@Override
+	public void run() {
 		System.out.println("LBOOTH");
+		
 		Random random = new Random();
 		int completionTime = 0;
 		
@@ -71,7 +76,5 @@ public class LSeller extends Thread {
 	public int getTimeToCompleteSale() {
 		return timeToCompleteSale;
 	}
-	public void run(){
-		startSelling();
-	}
+
 }

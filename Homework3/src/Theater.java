@@ -45,10 +45,10 @@ public class Theater {
 					theater[row - 1][col] = new Seat(customer.getName());
 					break;
 				} else { // if that row is full -> search for another row
-					if (row >= 5) {
-						row = row + 1 + gap; gap++;
-					} else if (row < 5) {
-						row = row - 1 + gap; gap++;
+					if (row <= 5) {
+						row = row + gap; gap++;
+					} else if (row > 5) {
+						row = row - gap; gap++;
 					}
 				}
 			}

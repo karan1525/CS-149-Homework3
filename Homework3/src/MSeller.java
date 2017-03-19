@@ -3,6 +3,8 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Random;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 
 public class MSeller extends Thread {
 	private Queue<Customer> customerLine;
@@ -39,8 +41,10 @@ public class MSeller extends Thread {
 			index++;
 		}
 	}
+	
 
-	public void startSelling() {
+	@Override
+	public void run() {
 		System.out.println("MBOOTH");
 		//Not done - testing
 		for(Customer c :customerLine){
