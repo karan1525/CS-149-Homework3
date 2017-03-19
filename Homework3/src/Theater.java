@@ -30,6 +30,7 @@ public class Theater {
 				if (col != -1) {
 					theater[row - 1][col] = new Seat(customer.getName());
 					theater[row - 1][col].isSold();
+					
 					break;
 				} else {
 					row++;

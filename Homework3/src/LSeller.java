@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
@@ -7,7 +9,7 @@ import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
 public class LSeller extends Thread {
-	private Queue<Customer> customerLine;
+	private ArrayList<Customer> customerLine;
 	private int timeToCompleteSale;
 	private boolean isOpen;
 	private int ticketsSold;
@@ -25,14 +27,16 @@ public class LSeller extends Thread {
 
 		// Each seller can expect N customers to arrive at random times
 		Comparator<Customer> comp = new ComparatorByArrivalTime();
-		customerLine = new PriorityQueue<Customer>(numOfCustomers, comp);
-		
+		customerLine = new ArrayList<Customer>();
+
 		Random random = new Random();
-		//1. Add based on arrival time first
+		// 1. Add based on arrival time first
 		for (int i = 0; i < numOfCustomers; i++) {
 			Customer c = new Customer(random.nextInt(60));
 			customerLine.add(c);
 		}
+		Collections.sort(customerLine, comp);
+		System.out.println("L" + ID + " "+ customerLine.toString());
 		//2. Then name the customer based on the arrival time
 		int index = 1;
 		for(Customer c : customerLine){

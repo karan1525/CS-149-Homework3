@@ -19,5 +19,10 @@ public class Customer {
 	public void setName(String newName) {
 		name = newName;
 	}
+	
+	@Override
+	public String toString(){
+		return name + arrivalTime;
+	}
 
 }
