@@ -16,6 +16,7 @@ public class LSeller extends Thread {
 	private int numTurnedAway;
 	private Theater theater;
 	private String sellerID;
+	private int TIME = 60;
 
 	public LSeller(int numOfCustomers, Theater t, int ID) {
 		ticketsSold = 0;
@@ -50,17 +51,38 @@ public class LSeller extends Thread {
 	@Override
 	public void run() {
 		System.out.println("LBOOTH");
-		
-		Random random = new Random();
+
 		int completionTime = 0;
 		
-		for(Customer c :customerLine){
-			try {
-				theater.sellSeat(c, sellerID);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		int currentCustomer= 0;
+		int i =0;
+		while(i < TIME){
+			if(customerLine.get(currentCustomer).getArrivalTime() <= i){ //checks if customer arrival time is equal to time
+				Random timeToProcess = new Random();
+				try {
+					theater.sellSeat(customerLine.get(currentCustomer), sellerID);
+					currentCustomer++;
+					i += timeToProcess.nextInt(7) + 4;
+					
+					if(currentCustomer == customerLine.size()){
+						break;
+					}
+					while(customerLine.get(currentCustomer).getArrivalTime() == i && currentCustomer < customerLine.size()-1){ //checks for other customers with same arrival time
+						theater.sellSeat(customerLine.get(currentCustomer), sellerID);
+						currentCustomer++;
+						i += timeToProcess.nextInt(7) + 4;
+					}
+
+					
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+			else{
+				i++;
+			}
+
 		}
 		
 		//I don't know how to get the time

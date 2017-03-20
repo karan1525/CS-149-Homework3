@@ -16,6 +16,7 @@ public class MSeller extends Thread {
 	private int numTurnedAway;
 	private String sellerID;
 	private Theater theater;
+	private final int TIME = 60;
 
 	public MSeller(int numOfCustomers, Theater t, int ID) {
 		ticketsSold = 0;
@@ -51,14 +52,35 @@ public class MSeller extends Thread {
 	@Override
 	public void run() {
 		System.out.println("MBOOTH");
-		//Not done - testing
-		for(Customer c :customerLine){
-			try {
-				theater.sellSeat(c, sellerID);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		int currentCustomer= 0;
+		int i =0;
+		while(i < TIME){
+			if(customerLine.get(currentCustomer).getArrivalTime() <= i){ //checks if customer arrival time is equal to time
+				Random timeToProcess = new Random();
+				try {
+					theater.sellSeat(customerLine.get(currentCustomer), sellerID);
+					currentCustomer++;
+					i += timeToProcess.nextInt(4) + 1;
+					
+					if(currentCustomer == customerLine.size()){
+						break;
+					}
+					while(customerLine.get(currentCustomer).getArrivalTime() == i && currentCustomer < customerLine.size()-1){ //checks for other customers with same arrival time
+						theater.sellSeat(customerLine.get(currentCustomer), sellerID);
+						currentCustomer++;
+						i += timeToProcess.nextInt(4) + 1;
+					}
+
+					
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+			else{
+				i++;
+			}
+
 		}
 	}
 

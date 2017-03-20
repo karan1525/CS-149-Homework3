@@ -61,16 +61,16 @@ public class Main implements Runnable{
 		LSeller l6Booth = new LSeller(numOfCustomers, theater, 6);
 
 		hBooth.start();
-//		m1Booth.start();
-//		m2Booth.start();
-//		m3Booth.start();
-//		m4Booth.start();
-//		l1Booth.start();
-//		l2Booth.start();
-//		l3Booth.start();
-//		l4Booth.start();
-//		l5Booth.start();
-//		l6Booth.start();
+		m1Booth.start();
+		m2Booth.start();
+		m3Booth.start();
+		m4Booth.start();
+		l1Booth.start();
+		l2Booth.start();
+		l3Booth.start();
+		l4Booth.start();
+		l5Booth.start();
+		l6Booth.start();
 		
 
 		try {
