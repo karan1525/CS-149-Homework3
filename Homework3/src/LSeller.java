@@ -55,7 +55,12 @@ public class LSeller extends Thread {
 		int completionTime = 0;
 		
 		for(Customer c :customerLine){
-			theater.sellSeat(c, sellerID);
+			try {
+				theater.sellSeat(c, sellerID);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		//I don't know how to get the time

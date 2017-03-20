@@ -1,11 +1,17 @@
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.concurrent.Semaphore;
 
 public class Theater {
 
 	private Seat[][] theater;
 	private final int ROWS = 10;
 	private final int COLUMNS = 10;
-
+	private static Semaphore sellerMLock = new Semaphore(1);
+	private static Semaphore sellerLLock = new Semaphore(1);
+	
 	public Theater() {
+		
 		theater = new Seat[ROWS][COLUMNS]; // create 10x10 theater of seats
 
 		for (int i = 0; i < ROWS; i++) { // fill empty theater with -- values
@@ -19,9 +25,11 @@ public class Theater {
 	 * The theater sells the ticket to customer
 	 * @param customer customer's name 
 	 * @param sellerID find the row based on the sellerID
+	 * @throws InterruptedException 
 	 */
-	public void sellSeat(Customer customer, String sellerID) {
+	public void sellSeat(Customer customer, String sellerID) throws InterruptedException {
 		int row = 0;
+		
 		switch (sellerID.substring(0, 1)) {
 		case "H": // Row 1
 			row = 1;
@@ -30,7 +38,6 @@ public class Theater {
 				if (col != -1) {
 					theater[row - 1][col] = new Seat(customer.getName());
 					theater[row - 1][col].isSold();
-					
 					break;
 				} else {
 					row++;
@@ -38,9 +45,11 @@ public class Theater {
 			}
 			break;
 		case "M": // Row 5 -> 6 -> 4 -> 7 -> etc( 3 -> 8 -> 2 -> 9 -> 1 -> 10 )
+//			Queue<Customer> waitingMQueue = new PriorityQueue();
 			row = 5;
 			int gap = 0;
-			while (!isFull() && row <= 10) {
+			sellerMLock.acquire();
+			while (!isFull() && row <= 10 ) {
 				int col = nearestSeat(row);
 				if (col != -1) {
 					theater[row - 1][col] = new Seat(customer.getName());
@@ -53,9 +62,12 @@ public class Theater {
 					}
 				}
 			}
+			sellerMLock.release();
 			break;
 		case "L":// Row 10 -> 9 -> up
+//			Queue<Customer> waitingLQueue = new PriorityQueue();
 			row = 10;
+			sellerLLock.acquire();
 			while (!isFull()) {
 				int col = nearestSeat(row);
 				if (col != -1) {
@@ -66,6 +78,7 @@ public class Theater {
 					row--;
 				}
 			}
+			sellerLLock.release();
 			break;
 		}
 	}

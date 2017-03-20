@@ -9,6 +9,7 @@ import java.util.concurrent.CyclicBarrier;
 public class Main implements Runnable{
 
 	Thread runnable;
+	private final int TIME = 60;
 
 	public Main(){
 		this.runnable = new Thread(this);
@@ -28,7 +29,6 @@ public class Main implements Runnable{
 	@Override
 	public void run() {
 		int numOfCustomers = 0;
-		int time = 0; //Can run from 0 -> 59
 
 		Scanner in = new Scanner(System.in);
 		System.out.println("How many customers?: " ); //get the number of customers
@@ -60,18 +60,18 @@ public class Main implements Runnable{
 		LSeller l5Booth = new LSeller(numOfCustomers, theater, 5);
 		LSeller l6Booth = new LSeller(numOfCustomers, theater, 6);
 
-		
 		hBooth.start();
-		m1Booth.start();
-		m2Booth.start();
-		m3Booth.start();
-		m4Booth.start();
-		l1Booth.start();
-		l2Booth.start();
-		l3Booth.start();
-		l4Booth.start();
-		l5Booth.start();
-		l6Booth.start();
+//		m1Booth.start();
+//		m2Booth.start();
+//		m3Booth.start();
+//		m4Booth.start();
+//		l1Booth.start();
+//		l2Booth.start();
+//		l3Booth.start();
+//		l4Booth.start();
+//		l5Booth.start();
+//		l6Booth.start();
+		
 
 		try {
 			hBooth.join();

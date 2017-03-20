@@ -53,7 +53,12 @@ public class MSeller extends Thread {
 		System.out.println("MBOOTH");
 		//Not done - testing
 		for(Customer c :customerLine){
-			theater.sellSeat(c, sellerID);
+			try {
+				theater.sellSeat(c, sellerID);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
