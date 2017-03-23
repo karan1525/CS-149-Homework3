@@ -7,6 +7,7 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.TimeUnit;
 
 public class LSeller extends Thread {
 	private ArrayList<Customer> customerLine;
@@ -23,11 +24,6 @@ public class LSeller extends Thread {
 		isOpen = true;
 		sellerID = "L" + String.valueOf(ID);
 		this.theater = t;
-<<<<<<< HEAD
-=======
-
-
->>>>>>> edd3280c208b34241790407af3220cdf247bad2c
 
 		// Each seller can expect N customers to arrive at random times
 		Comparator<Customer> comp = new ComparatorByArrivalTime();
@@ -52,7 +48,6 @@ public class LSeller extends Thread {
 		}
 	}
 
-<<<<<<< HEAD
 	@Override
 	public void run() {
 		int currentCustomer = 0;
@@ -67,30 +62,18 @@ public class LSeller extends Thread {
 																			// equal
 																			// to
 																			// time
-=======
-
-	@Override
-	public void run() {
-		System.out.println("LBOOTH");
-
-		int completionTime = 0;
-
-		int currentCustomer= 0;
-		int i =0;
-		while(i < TIME){
-			if(customerLine.get(currentCustomer).getArrivalTime() <= i){ //checks if customer arrival time is equal to time
->>>>>>> edd3280c208b34241790407af3220cdf247bad2c
 				Random timeToProcess = new Random();
 				try {
+					int tTime = timeToProcess.nextInt(7) + 4;
+					i += tTime;
+					TimeUnit.SECONDS.sleep(tTime);
+					
 					theater.sellSeat(customerLine.get(currentCustomer), sellerID);
 					currentCustomer++;
-					i += timeToProcess.nextInt(7) + 4;
 
-<<<<<<< HEAD
+					
+
 					if (currentCustomer == customerLine.size()) {
-=======
-					if(currentCustomer == customerLine.size()){
->>>>>>> edd3280c208b34241790407af3220cdf247bad2c
 						break;
 					}
 					while (customerLine.get(currentCustomer).getArrivalTime() == i
@@ -101,15 +84,13 @@ public class LSeller extends Thread {
 																			// with
 																			// same
 																			// arrival
-						i += timeToProcess.nextInt(7) + 4;													// time
+						int tTime2 = timeToProcess.nextInt(7) + 4;
+						i += tTime2;
+						TimeUnit.SECONDS.sleep(tTime2);
 						theater.sellSeat(customerLine.get(currentCustomer), sellerID);
 						currentCustomer++;
 					}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> edd3280c208b34241790407af3220cdf247bad2c
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -117,17 +98,12 @@ public class LSeller extends Thread {
 			} else {
 				i++;
 			}
+
 		}
-<<<<<<< HEAD
 		if (customerLine.size() - currentCustomer - 1 > 0) {
 			numTurnedAway = customerLine.size() - currentCustomer - 1;
 		} 
 	}
-=======
-
-	}
-
->>>>>>> edd3280c208b34241790407af3220cdf247bad2c
 
 	public int getTicketsSold() {
 		return ticketsSold;

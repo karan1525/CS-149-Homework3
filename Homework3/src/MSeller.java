@@ -7,6 +7,7 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.TimeUnit;
 
 public class MSeller extends Thread {
 	private ArrayList<Customer> customerLine;
@@ -63,34 +64,31 @@ public class MSeller extends Thread {
 																			// to
 																			// time
 				Random timeToProcess = new Random();
-				try {
-					theater.sellSeat(customerLine.get(currentCustomer), sellerID);
-					currentCustomer++;
-					i += timeToProcess.nextInt(4) + 1;
-
-					if (currentCustomer == customerLine.size()) {
-						break;
-					}
-					while (customerLine.get(currentCustomer).getArrivalTime() == i
-							&& currentCustomer < customerLine.size() - 1) { // checks
-																			// for
-																			// other
-																			// customers
-																			// with
-																			// same
-																			// arrival
-																			// time
-						
-						i += timeToProcess.nextInt(4) + 1;
-						theater.sellSeat(customerLine.get(currentCustomer), sellerID);
-						currentCustomer++;
-						
-					}
-
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                try {
+                    int tTime = timeToProcess.nextInt(4) + 1;
+                    i += tTime;
+                    TimeUnit.SECONDS.sleep(tTime);
+                    theater.sellSeat(customerLine.get(currentCustomer), sellerID);
+                    currentCustomer++;
+                    
+                    if(currentCustomer == customerLine.size()){
+                        break;
+                    }
+                    while(customerLine.get(currentCustomer).getArrivalTime() == i && currentCustomer < customerLine.size()-1){ //checks for other customers with same arrival time
+                        i += timeToProcess.nextInt(4) + 1;
+                        int tTime2 = timeToProcess.nextInt(4) + 1;
+                        i += tTime2;
+                        TimeUnit.SECONDS.sleep(tTime2);
+                        theater.sellSeat(customerLine.get(currentCustomer), sellerID);
+                        currentCustomer++;
+                        
+                    }
+                    
+                    
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
 			} else {
 				i++;
 			}

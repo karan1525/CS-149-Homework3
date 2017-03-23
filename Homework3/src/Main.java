@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -6,11 +5,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main implements Runnable {
-=======
-import java.util.*;
-
-public class Main implements Runnable{
->>>>>>> edd3280c208b34241790407af3220cdf247bad2c
 
 	Thread runnable;
 	private final int TIME = 60;

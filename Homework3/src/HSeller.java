@@ -7,6 +7,7 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.TimeUnit;
 
 public class HSeller extends Thread {
 	private ArrayList<Customer> customerLine;
@@ -52,19 +53,26 @@ public class HSeller extends Thread {
 		while(i < TIME){
 			if(customerLine.get(currentCustomer).getArrivalTime() <= i){ //checks if customer arrival time is equal to time
 				Random timeToProcess = new Random();
-				try {
-					theater.sellSeat(customerLine.get(currentCustomer), sellerID);
-					currentCustomer++;
-					i += timeToProcess.nextInt(2) + 1;
-					
-					if(currentCustomer == customerLine.size()){
-						break;
-					}
-					while(customerLine.get(currentCustomer).getArrivalTime() == i && currentCustomer < customerLine.size()-1){ //checks for other customers with same arrival time
-						i += timeToProcess.nextInt(2) + 1;
-						theater.sellSeat(customerLine.get(currentCustomer), sellerID);
-						currentCustomer++;
-					}
+                try {
+                    //get the time from the random generator
+                    int tTime = timeToProcess.nextInt(2) + 1;
+                    i += tTime;
+                    TimeUnit.SECONDS.sleep(tTime);
+                    theater.sellSeat(customerLine.get(currentCustomer), sellerID);
+                    currentCustomer++;
+                    
+                    
+                    if(currentCustomer == customerLine.size()){
+                        break;
+                    }
+                    while(customerLine.get(currentCustomer).getArrivalTime() == i && currentCustomer < customerLine.size()-1){ //checks for other customers with same arrival time
+                        int tTime2 = timeToProcess.nextInt(2) + 1;
+                        i += tTime2;
+                        TimeUnit.SECONDS.sleep(tTime2);
+                        theater.sellSeat(customerLine.get(currentCustomer), sellerID);
+                        currentCustomer++;
+                        
+                    }
 
 					
 				} catch (InterruptedException e) {
