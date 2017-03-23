@@ -41,8 +41,8 @@ public class LSeller extends Thread {
 		//2. Then name the customer based on the arrival time
 		int index = 1;
 		for(Customer c : customerLine){
-			if(numOfCustomers < 9) c.setName(sellerID + "0" + String.valueOf(index));
-			else c.setName(sellerID + String.valueOf((index - 1) + numOfCustomers)); //for 10 or 15
+			if(index <= 9) c.setName(sellerID + "0" + String.valueOf(index));
+			else c.setName(sellerID + String.valueOf(index)); //for 10 or 15
 			index++;
 		}
 	}
@@ -84,21 +84,7 @@ public class LSeller extends Thread {
 			}
 
 		}
-		
-		//I don't know how to get the time
-		
-//		while (getTime() >= 0 && getTime() < 60 && getTime() == completiontime ) {
-//			System.out.println("started");
-//			if (!theater.isFull()) {
-//				if (customerLine.peek().getArrivalTime() == getTime()) {
-//					Customer c = customerLine.remove();
-//					theater.sellSeat(c, sellerID);
-//					completiontime = getTime() + (random.nextInt(4) + 3);
-//				}
-//			}
-//		}
 
-	}
 
 	public int getTicketsSold() {
 		return ticketsSold;

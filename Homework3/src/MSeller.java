@@ -40,10 +40,8 @@ public class MSeller extends Thread {
 		// 2. Then name the customer based on the arrival time
 		int index = 1;
 		for (Customer c : customerLine) {
-			if (numOfCustomers < 9)
-				c.setName(sellerID + "0" + String.valueOf(index));
-			else
-				c.setName(sellerID + String.valueOf(index)); // for 10 or 15
+			if(index <= 9) c.setName(sellerID + "0" + String.valueOf(index));
+			else c.setName(sellerID + String.valueOf(index)); //for 10 or 15
 			index++;
 		}
 	}
