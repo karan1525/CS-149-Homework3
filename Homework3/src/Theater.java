@@ -38,6 +38,20 @@ public class Theater {
 				if (col != -1) {
 					theater[row - 1][col] = new Seat(customer.getName());
 					theater[row - 1][col].isSold();
+					String customerArrival = "\nCustomer: " + customer.getName() + 
+										" arrived at ";
+					if(customer.getArrivalTime() < 10) {
+						customerArrival += "00:0"+customer.getArrivalTime() + "mins" + 
+							" in " + "HBOOTH";
+					} else {
+						customerArrival += "00:"+customer.getArrivalTime() + "mins" + 
+								" in " + "HBOOTH";
+					}
+					
+					String customerSeatInfo = "Customer: " + customer.getName() + " seat is " + "Row " + Integer.toString(row) + "," + "Col " + (col+1);
+					System.out.println(customerArrival);
+					System.out.println(customerSeatInfo);
+					this.printTheater();
 					break;
 				} else {
 					row++;
@@ -53,6 +67,21 @@ public class Theater {
 				int col = nearestSeat(row);
 				if (col != -1) {
 					theater[row - 1][col] = new Seat(customer.getName());
+					theater[row-1][col].isSold();
+					String customerArrival = "\nCustomer: " + customer.getName() + 
+							" arrived at ";
+					if(customer.getArrivalTime() < 10) {
+						customerArrival += "00:0"+customer.getArrivalTime() + "mins" + 
+							" in " + "MBOOTH";
+					} else {
+						customerArrival += "00:"+customer.getArrivalTime() + "mins" + 
+								" in " + "MBOOTH";
+					}
+					
+					String customerSeatInfo = "Customer: " + customer.getName() + " seat is " + "Row " + Integer.toString(row) + "," + "Col " + (col+1);
+					System.out.println(customerArrival);
+					System.out.println(customerSeatInfo);
+					this.printTheater();
 					break;
 				} else { // if that row is full -> search for another row
 					if (row <= 5) {
@@ -73,6 +102,20 @@ public class Theater {
 				if (col != -1) {
 					theater[row - 1][col] = new Seat(customer.getName());
 					theater[row - 1][col].isSold();
+					String customerArrival = "\nCustomer: " + customer.getName() + 
+							" arrived at ";
+					if(customer.getArrivalTime() < 10) {
+						customerArrival += "00:0"+customer.getArrivalTime() + "mins" + 
+							" in " + "LBOOTH";
+					} else {
+						customerArrival += "00:"+customer.getArrivalTime() + "mins" + 
+								" in " + "LBOOTH";
+					}
+					
+					String customerSeatInfo = "Customer: " + customer.getName() + " seat is " + "Row " + Integer.toString(row) + "," + "Col " + (col+1);
+					System.out.println(customerArrival);
+					System.out.println(customerSeatInfo);
+					this.printTheater();
 					break;
 				} else {
 					row--;
