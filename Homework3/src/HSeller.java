@@ -1,18 +1,13 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.Random;
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.TimeUnit;
 
 public class HSeller extends Thread {
 	private ArrayList<Customer> customerLine;
 	private int timeToCompleteSale;
-	private boolean isOpen;
+
 	private int ticketsSold;
 	private int numTurnedAway;
 	private String sellerID;
@@ -23,7 +18,6 @@ public class HSeller extends Thread {
 		ticketsSold = 0;
 		sellerID = "H" + String.valueOf(ID);
 		this.theater = t;
-		isOpen = true;
 
 		// Each seller can expect N customers to arrive at random times
 		Comparator<Customer> comp = new ComparatorByArrivalTime();
@@ -76,7 +70,6 @@ public class HSeller extends Thread {
 
 					
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

@@ -1,5 +1,3 @@
-import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.concurrent.Semaphore;
 
 public class Theater {
@@ -41,14 +39,14 @@ public class Theater {
 					String customerArrival = "\nCustomer: " + customer.getName() + 
 										" arrived at ";
 					if(customer.getArrivalTime() < 10) {
-						customerArrival += "00:0"+customer.getArrivalTime() + "mins" + 
+						customerArrival += "00:0"+customer.getArrivalTime() + " mins" + 
 							" in " + "HBOOTH";
 					} else {
-						customerArrival += "00:"+customer.getArrivalTime() + "mins" + 
+						customerArrival += "00:"+customer.getArrivalTime() + " mins" + 
 								" in " + "HBOOTH";
 					}
 					
-					String customerSeatInfo = "Customer: " + customer.getName() + " seat is " + "Row " + Integer.toString(row) + "," + "Col " + (col+1);
+					String customerSeatInfo = "Customer: " + customer.getName() + " is seated at " + "Row " + Integer.toString(row) + "," + "Col " + (col+1);
 					System.out.println(customerArrival);
 					System.out.println(customerSeatInfo);
 					this.printTheater();
@@ -74,11 +72,11 @@ public class Theater {
 						customerArrival += "00:0"+customer.getArrivalTime() + "mins" + 
 							" in " + "MBOOTH";
 					} else {
-						customerArrival += "00:"+customer.getArrivalTime() + "mins" + 
+						customerArrival += "00:"+customer.getArrivalTime() + " mins" + 
 								" in " + "MBOOTH";
 					}
 					
-					String customerSeatInfo = "Customer: " + customer.getName() + " seat is " + "Row " + Integer.toString(row) + "," + "Col " + (col+1);
+					String customerSeatInfo = "Customer: " + customer.getName() + " is seated at " + "Row " + Integer.toString(row) + "," + "Col " + (col+1);
 					System.out.println(customerArrival);
 					System.out.println(customerSeatInfo);
 					this.printTheater();
@@ -105,14 +103,14 @@ public class Theater {
 					String customerArrival = "\nCustomer: " + customer.getName() + 
 							" arrived at ";
 					if(customer.getArrivalTime() < 10) {
-						customerArrival += "00:0"+customer.getArrivalTime() + "mins" + 
+						customerArrival += "00:0"+customer.getArrivalTime() + " mins" + 
 							" in " + "LBOOTH";
 					} else {
-						customerArrival += "00:"+customer.getArrivalTime() + "mins" + 
+						customerArrival += "00:"+customer.getArrivalTime() +  " mins" + 
 								" in " + "LBOOTH";
 					}
 					
-					String customerSeatInfo = "Customer: " + customer.getName() + " seat is " + "Row " + Integer.toString(row) + "," + "Col " + (col+1);
+					String customerSeatInfo = "Customer: " + customer.getName() + " is seated at " + "Row " + Integer.toString(row) + "," + "Col " + (col+1);
 					System.out.println(customerArrival);
 					System.out.println(customerSeatInfo);
 					this.printTheater();

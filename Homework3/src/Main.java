@@ -1,13 +1,8 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.PriorityQueue;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main implements Runnable {
 
 	Thread runnable;
-	private final int TIME = 60;
 
 	public Main() {
 		this.runnable = new Thread(this);
@@ -30,7 +25,7 @@ public class Main implements Runnable {
 
 		Scanner in = new Scanner(System.in);
 		System.out.println("How many customers?: "); // get the number of
-														// customers
+		// customers
 		try { // read the input & create customers & put it into queue
 			numOfCustomers = in.nextInt();
 			in.close();
@@ -42,9 +37,9 @@ public class Main implements Runnable {
 		Theater theater = new Theater(); // created theater
 		// Seller for high-priced tickets
 		HSeller hBooth = new HSeller(numOfCustomers, theater, 0);// create all
-																	// threads
-																	// and run
-																	// them here
+		// threads
+		// and run
+		// them here
 
 		// Sellers for medium-priced tickets
 		MSeller m1Booth = new MSeller(numOfCustomers, theater, 1);
@@ -92,9 +87,9 @@ public class Main implements Runnable {
 			e.printStackTrace();
 		}
 
-		System.out.println("THEATER");// prints current theater
+		System.out.println("\nTHEATER");// prints current theater
 		theater.printTheater();
-		System.out.println("The theather is full: " + theater.isFull());
+		System.out.println("\nThe theater is full: " + theater.isFull() + "\n");
 
 		if (hBooth.getNumTurnedAway() != 0) { //When there are number of people who got turned away
 			System.out.println(
@@ -104,8 +99,8 @@ public class Main implements Runnable {
 			System.out.println(
 					hBooth.getSellerID() + "\nNumber of tickets sold: " + (numOfCustomers - hBooth.getNumTurnedAway()));
 		}
-		
-		
+
+
 		int index = 0;
 		while (index < 4) {
 			if (sellerM[index].getNumTurnedAway() != 0) { //When there are number of people who got turned away
