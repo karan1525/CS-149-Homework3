@@ -47,7 +47,6 @@ public class HSeller extends Thread {
 
 	@Override
 	public void run() {
-		System.out.println("HBOOTH");
 		int currentCustomer= 0;
 		int i =0;
 		while(i < TIME){
@@ -62,9 +61,9 @@ public class HSeller extends Thread {
 						break;
 					}
 					while(customerLine.get(currentCustomer).getArrivalTime() == i && currentCustomer < customerLine.size()-1){ //checks for other customers with same arrival time
+						i += timeToProcess.nextInt(2) + 1;
 						theater.sellSeat(customerLine.get(currentCustomer), sellerID);
 						currentCustomer++;
-						i += timeToProcess.nextInt(2) + 1;
 					}
 
 					
@@ -76,7 +75,10 @@ public class HSeller extends Thread {
 			else{
 				i++;
 			}
-
+			
+		}
+		if (customerLine.size() - currentCustomer - 1 > 0) {
+			numTurnedAway = customerLine.size() - currentCustomer - 1;
 		}
 	}
 
@@ -86,6 +88,14 @@ public class HSeller extends Thread {
 
 	public int getTimeToCompleteSale() {
 		return timeToCompleteSale;
+	}
+	
+	public int getNumTurnedAway(){
+		return numTurnedAway;
+		
+	}
+	public String getSellerID(){
+		return sellerID;
 	}
 
 }
