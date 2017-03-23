@@ -23,8 +23,8 @@ public class LSeller extends Thread {
 		isOpen = true;
 		sellerID = "L" + String.valueOf(ID);
 		this.theater = t;
-		
-		
+
+
 
 		// Each seller can expect N customers to arrive at random times
 		Comparator<Customer> comp = new ComparatorByArrivalTime();
@@ -46,14 +46,14 @@ public class LSeller extends Thread {
 			index++;
 		}
 	}
-	
-	
+
+
 	@Override
 	public void run() {
 		System.out.println("LBOOTH");
 
 		int completionTime = 0;
-		
+
 		int currentCustomer= 0;
 		int i =0;
 		while(i < TIME){
@@ -63,7 +63,7 @@ public class LSeller extends Thread {
 					theater.sellSeat(customerLine.get(currentCustomer), sellerID);
 					currentCustomer++;
 					i += timeToProcess.nextInt(7) + 4;
-					
+
 					if(currentCustomer == customerLine.size()){
 						break;
 					}
@@ -73,7 +73,7 @@ public class LSeller extends Thread {
 						i += timeToProcess.nextInt(7) + 4;
 					}
 
-					
+
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -82,8 +82,9 @@ public class LSeller extends Thread {
 			else{
 				i++;
 			}
-
 		}
+
+	}
 
 
 	public int getTicketsSold() {

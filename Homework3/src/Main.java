@@ -1,10 +1,4 @@
-import java.util.Comparator;
-import java.util.PriorityQueue;
-import java.util.Random;
-import java.util.Scanner;
-import java.util.concurrent.CyclicBarrier;
-
-
+import java.util.*;
 
 public class Main implements Runnable{
 
@@ -86,6 +80,7 @@ public class Main implements Runnable{
 			l5Booth.join();
 			l6Booth.join();			
 		} catch (InterruptedException e) {
+			System.out.println("Thread failed to join!");
 			e.printStackTrace();
 		}
 
